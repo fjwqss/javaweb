@@ -24,6 +24,8 @@
 	ResultSet rec_info = db.executeQuery("select * from recycleinfo");
 	if(i==1)
 		{
+		//tablename:  recycleinfo
+		//fieilds -column: id,recycleinfo
 		// 向回收信息表中加入已删除的书籍信息的id
 		  int de_sql = db.executeUpdate("insert into recycleinfo(id) values(i)");
 		// 遍历回收信息表中已经存在的删除的书籍信息的id

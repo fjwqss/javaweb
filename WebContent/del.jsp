@@ -10,16 +10,17 @@
   <jsp:useBean id="db" class="book.bookinfo" scope="page"/>
 	<%
 	request.setCharacterEncoding("gb2312");
+	
 	String id=request.getParameter("id");
 	int i=db.executeUpdate("delete from book_info where id="+id);
 	if(i==1)
 		{out.println("<script language='javaScript'> alert('删除成功，点击确定后自动跳到主页！');</script>");
 		response.setHeader("refresh","1;url=index.jsp");
 		}
-		else{
+	else{
 		out.println("<script language='javaScript'> alert('删除失败，点击确定后自动跳到主页！');</script>");
 		response.setHeader("refresh","1;url=del.jsp");
-		}
+	}
      db.close();
 	%>
 </body>

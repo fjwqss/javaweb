@@ -10,6 +10,7 @@
   <jsp:useBean id="db" class="book.bookinfo" scope="page"/>
   <%
   request.setCharacterEncoding("gb2312");
+  
   String id=request.getParameter("id");
   ResultSet rs=db.executeQuery("select * from book_info where id="+id);
   rs.next();

@@ -7,13 +7,18 @@
 <title>图书管理界面</title>
 </head>
 <body>
-  <a href=add.jsp>增加图书信息2</a><p>
+  <a href=add.jsp>增加图书信息</a> | 
+  <a href=recycle.jsp>图书回收站</a> |
+  <a href=search.jsp>检索</a> 
+  <p>
+  
 	<table border="1" >
 	<tr><td>书名<td>作者<td>价格<td>管理
 	<jsp:useBean id="db" class="book.bookinfo" scope="page"/><!-- 导入自己的类（Javabean） -->
 	<%
 	String s="select * from book_info";
 	ResultSet rs=db.executeQuery(s);
+	//rs.next();
 	while(rs.next())
 	{
 		int id=rs.getInt(1);

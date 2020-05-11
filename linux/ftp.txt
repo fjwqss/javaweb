@@ -1,0 +1,39 @@
+1. yum install vsftpd -y  ###安装服务器
+
+===============================
+匿名用户-配置
+======================
+2. 编辑/etc/vsftpd/vsftpd.conf
+
+# anonymous_enable=YES    ####开启匿名用户登录
+
+
+3.systemctl start vsftpd.service  ####启动服务
+4.(win)  ftp:\\192.168.190.142 
+  (linux) ftp 192.168.190.142  
+   账户：anonymous ， 密码：任意
+
+==========================
+本地用户-配置
+=========================
+5. 编辑/etc/vsftpd/vsftpd.conf
+
+local_enbale=YES           ###开启本地用户登录
+write_enable=YES           ###允许本地用户可写
+local_root=/var/ftp/user   ###设置本地用户登录目录
+
+6.  systemctl restart vsftpd.service  #重启服务
+
+7.mkdir /var/ftp/user 
+8.  
+useradd test ##创建一个测试用户
+echo 123 | passwd test --stdin
+
+9.编辑 /etc/passwd
+test:x:1001:1001::/home/test:/sbin/nologin
+
+10. chown -Rf test /var/ftp/user/  ###设置用户权限
+
+11.(win)  ftp:\\192.168.190.142 
+  (linux) ftp 192.168.190.142  
+   账户：test ， 密码：123
