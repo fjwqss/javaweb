@@ -7,6 +7,7 @@
 <title>增加图书</title>
 </head>
 <body>
+<jsp:include page="topbar.jsp"></jsp:include>
   <form action="add.jsp" method="post">
 <table >
 <CAPTION>添加图书信息</CAPTION>

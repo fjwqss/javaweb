@@ -1,0 +1,46 @@
+1. yum install bind bind-chroot bind-utils -y
+
+2.编辑/etc/named.conf，
+  找到listen-on 这一行。改为 listen-on port 53 {any； }；
+  找到allow-query 这一行，改为：allow-query {any； }；
+
+3.对配置文件进行语法检查：
+  named-checkconf /etc/named.conf
+
+4. 启动dns服务
+  systemctl start named
+
+5. 关闭防火墙
+systemctl stop firewalld.service
+
+6.测试
+dig www.baidu.com @192.168.190.142  ###从指定的 DNS 服务器上进行查询域名解析
+
+7.配置正向解析
+编辑/etc/named.conf,添加
+
+zone "fjsdxy.edu" IN {
+   type master;
+   file "data/fjsdxy.edu.zone";
+};
+
+在/var/named/下新建.zone 文件。
+根据上面添加的 file "data/fjsdxy.edu.zone"
+
+$TTL 3600
+@ IN SOA fjsdxy.edu admin.fjsdxy.edu. (
+0 ; serial
+1D ; refresh
+1H ; retry
+1W ; expire
+3H ) ; minimum
+@ IN NS 192.168.190.142.
+www IN A 192.168.190.142
+test IN A 192.168.190.142
+
+named-checkzone fjsdxy.edu fjsdxy.edu.zone
+
+#systemctl restart named
+dig www.fjsdxy.edu @192.168.190.142
+添加网卡DNS服务器
+#ping www.fjsdxy.edu

@@ -1,20 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.sql.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title>图书管理界面</title>
+<title>搜索结果</title>
 </head>
 <body>
 <jsp:include page="topbar.jsp"></jsp:include>
+
+|
+  <form action="search.jsp">
+  <input type=text size=10 name=skey>
+  <input type=submit value="检索">
+  </form>
   <p>
   
 	<table border="1" >
 	<tr><td>书名<td>作者<td>价格<td>管理
 	<jsp:useBean id="db" class="book.bookinfo" scope="page"/><!-- 导入自己的类（Javabean） -->
 	<%
-	String s="select * from book_info where isdel=0";
+	request.setCharacterEncoding("gb2312");
+	String skey2=request.getParameter("skey");
+	String s="select * from book_info where bookname like '%"+skey2+"%' and isdel=0";
+	//out.println("sql："+s);
 	ResultSet rs=db.executeQuery(s);
 	//rs.next();
 	while(rs.next())

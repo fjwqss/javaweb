@@ -1,0 +1,8 @@
+Select count(*) From book_info
+Select sum(price) From book_info
+
+ALTER TABLE book_info ADD isdel int
+ALTER TABLE book_info DROP COLUMN isdel
+
+Create TABLE recyleinfo(id int,bookname varchar(50),author varchar(50),bookid int)
+drop table recyleinfo
